@@ -1,9 +1,9 @@
-import axios from "../../services/axios";
+import axios from 'axios';
 require('dotenv').config();
 
-export const fetchData = async () => {
+export const fetchData = async (fetchUrl: string) => {
   try {
-    const response = await axios.get('/issues', {
+    const response = await axios.get(fetchUrl+'/issues', {
       headers: {
         Authorization: `Bearer ${process.env.API_TOKEN}`,
       },
