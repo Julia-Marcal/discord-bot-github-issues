@@ -23,7 +23,7 @@ export const deploy_com = async () =>{
         Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
         {body: commands}
       )
-    }catch (error){
+    } catch (error){
         console.error(error)
     }
 }

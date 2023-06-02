@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Collection, commands } = require('discord.js')
+const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
 import { deploy_com } from './deploy-commands'
 import dotenv from 'dotenv'
 
@@ -24,7 +24,7 @@ for (const file of commandFiles){
 }
 
 client.once(Events.ClientReady, (cli: any) => {
-  console.log(`Ready! Logged in as ${cli.user.tag}`);
+  console.log(`${cli.user.tag} is logged`);
 });
 
 client.login(process.env.DISCORD_TOKEN)
@@ -33,17 +33,18 @@ deploy_com()
 
 client.on(Events.InteractionCreate, async (interaction: any) =>{
     if (!interaction.isChatInputCommand()) return
+
     const command = interaction.client.commands.get(interaction.commandName)
     if (!command) {
-        console.error("Comando não encontrado")
-        return
+      console.error("No command")
+      return
     }
     try {
-        await command.execute(interaction)
+      await command.execute(interaction)
     }
     catch (error) {
-        console.error(error)
-        await interaction.reply("Houve um erro ao executar esse comando!")
+      console.error(error)
+      await interaction.reply("There was an error when executing the command")
     }
 })
 
